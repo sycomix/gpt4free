@@ -47,7 +47,7 @@ class Mail:
             raise Exception("Failed to create email")
 
     def fetch_inbox(self):
-        return self.client.get(f"https://api.mail.tm/messages").json()["hydra:member"]
+        return self.client.get("https://api.mail.tm/messages").json()["hydra:member"]
 
     def get_message(self, message_id: str):
         return self.client.get(f"https://api.mail.tm/messages/{message_id}").json()

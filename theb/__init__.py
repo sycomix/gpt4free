@@ -14,7 +14,7 @@ class Completion:
     message_queue = Queue()
     stream_completed = False
 
-    def request(prompt: str):
+    def request(self):
         headers = {
             'authority': 'chatbot.theb.ai',
             'content-type': 'application/json',
@@ -22,12 +22,11 @@ class Completion:
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
         }
 
-        requests.post('https://chatbot.theb.ai/api/chat-process', headers=headers,
-            content_callback = Completion.handle_stream_response,
-            json = {
-                'prompt': prompt,
-                'options': {}
-            }
+        requests.post(
+            'https://chatbot.theb.ai/api/chat-process',
+            headers=headers,
+            content_callback=Completion.handle_stream_response,
+            json={'prompt': self, 'options': {}},
         )
 
         Completion.stream_completed = True

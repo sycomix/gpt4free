@@ -40,10 +40,7 @@ def query_theb(question: str) -> str:
     # Set cloudflare clearance cookie and get answer from GPT-4 model
     response = ""
     try:
-        result = theb.Completion.create(
-            prompt = question)
-        return result
-    
+        return theb.Completion.create(prompt=question)
     except Exception as e:
         # Return error message if an exception occurs
         return f'An error occurred: {e}. Please make sure you are using a valid cloudflare clearance token and user agent.'

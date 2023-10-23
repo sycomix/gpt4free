@@ -30,7 +30,7 @@ class Completion:
         client.headers = Completion.__get_headers()
 
         response = client.get(
-            f'https://you.com/api/streamingSearch',
+            'https://you.com/api/streamingSearch',
             params={
                 'q': prompt,
                 'page': page,
@@ -40,7 +40,9 @@ class Completion:
                 'mkt': mkt,
                 'responseFilter': response_filter,
                 'domain': domain,
-                'queryTraceId': str(uuid4()) if query_trace_id is None else query_trace_id,
+                'queryTraceId': str(uuid4())
+                if query_trace_id is None
+                else query_trace_id,
                 'chat': str(chat),  # {'question':'','answer':' ''}
             },
         )

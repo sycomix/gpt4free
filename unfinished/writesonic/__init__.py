@@ -76,7 +76,7 @@ class Account:
 
     @staticmethod
     def get_user():
-        password = f'0opsYouGoTme@1234'
+        password = '0opsYouGoTme@1234'
         f_name = get_first_name()
         l_name = get_last_name()
         hosts = ['gmail.com', 'protonmail.com', 'proton.me', 'outlook.com']
@@ -128,19 +128,17 @@ class Account:
 
 
 class Completion:
-    def create(
-            api_key: str,
-            prompt: str,
-            enable_memory: bool = False,
-            enable_google_results: bool = False,
-            history_data: list = []) -> SonicResponse:
-        response = post('https://api.writesonic.com/v2/business/content/chatsonic?engine=premium',
-                        headers={"X-API-KEY": api_key},
-                        json={
-                            "enable_memory": enable_memory,
-                            "enable_google_results": enable_google_results,
-                            "input_text": prompt,
-                            "history_data": history_data}).json()
+    def create(self, prompt: str, enable_memory: bool = False, enable_google_results: bool = False, history_data: list = []) -> SonicResponse:
+        response = post(
+            'https://api.writesonic.com/v2/business/content/chatsonic?engine=premium',
+            headers={"X-API-KEY": self},
+            json={
+                "enable_memory": enable_memory,
+                "enable_google_results": enable_google_results,
+                "input_text": prompt,
+                "history_data": history_data,
+            },
+        ).json()
 
         return SonicResponse({
             'id': f'cmpl-premium-{int(time())}',

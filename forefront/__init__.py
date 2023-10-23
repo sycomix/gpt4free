@@ -14,9 +14,11 @@ class Account:
     @staticmethod
     def create(proxy=None, logging=False):
 
-        proxies = {
-            'http': 'http://' + proxy,
-            'https': 'http://' + proxy} if proxy else False
+        proxies = (
+            {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
+            if proxy
+            else False
+        )
 
         start = time()
 
@@ -53,7 +55,7 @@ class Account:
 
         if logging: print(response.text)
 
-        if not 'sign_up_attempt' in response.text:
+        if 'sign_up_attempt' not in response.text:
             return 'Failed to create account!'
 
         while True:
@@ -103,7 +105,7 @@ class StreamingCompletion:
             'authority': 'chat-server.tenant-forefront-default.knative.chi.coreweave.com',
             'accept': '*/*',
             'accept-language': 'en,fr-FR;q=0.9,fr;q=0.8,es-ES;q=0.7,es;q=0.6,en-US;q=0.5,am;q=0.4,de;q=0.3',
-            'authorization': 'Bearer ' + token,
+            'authorization': f'Bearer {token}',
             'cache-control': 'no-cache',
             'content-type': 'application/json',
             'origin': 'https://chat.forefront.ai',
